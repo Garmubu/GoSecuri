@@ -1,31 +1,15 @@
-import htmlflow.*;
-import org.xmlet.htmlapifaster.EnumRelType;
+    import htmlflow.*;
+    import org.xmlet.htmlapifaster.EnumRelType;
 
-import java.io.*;
-import java.util.Scanner;
+    import java.io.*;
+    import java.util.Scanner;
 
-public class GenerationFicheAgent {
+    public class GenerationFicheAgent {
     public static void main(String[] args)  {
-        InputStream ins = null;
-        try {
-            ins = new FileInputStream("data/cberthier.txt");
-        } catch (FileNotFoundException ex) {
-            ex.printStackTrace();
-        }
-        Scanner obj = new Scanner(ins);;
-    StringBuilder affectation=new StringBuilder();
-
-       String nom= obj.nextLine();
-       String prenom=obj.nextLine();
-        while (obj.hasNextLine()){
-            if (obj.nextLine()==""){
-                while (obj.hasNextLine()){
-                    affectation.append(obj.nextLine()+";");
-                }
-            }
-        }
-        String affect=affectation.toString();
-        System.out.println(affect);
+        String nom=getNomAgent("data/cberthier.txt");
+        String prenom=getPrenomAgent("data/cberthier.txt");
+        String[] listeEquipement=getListEquipement();
+        String[] listeEquipementAffecte=getEquipementAffecte("data/cberthier.txt");
 
     HtmlView html=StaticHtml.view(v -> v
             .html()
@@ -41,20 +25,83 @@ public class GenerationFicheAgent {
             .p().text(nom)
             .__()
             .__()
-
             .div().attrClass("CNI")
-            .img().attrSrc("C:\\Users\\killi\\IdeaProjects\\GoSecuri\\data\\cberthier.jpg").attrAlt("CNI")
+            .img().attrSrc("data/cberthier.jpg").attrAlt("CNI")
+            .__()
             .__()
             .__()
             .__()
     );
-
         try {
             html
-                    .setPrintStream(new PrintStream(new FileOutputStream("C:\\wamp\\www\\GoSecuri\\FicheAgent.html")))
+                    .setPrintStream(new PrintStream(new FileOutputStream("./FicheAgent.html")))
                             .write();                       // 3) write to details.html file                     // 2) print to the standard output
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
-}
+
+    private static String getNomAgent(String name){
+        InputStream ins = null;
+        try {
+            ins = new FileInputStream(name);
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        Scanner obj = new Scanner(ins);
+        return obj.nextLine();
+    }
+
+    private static String getPrenomAgent(String fichier){
+        InputStream ins = null;
+        try {
+            ins = new FileInputStream(fichier);
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        Scanner obj = new Scanner(ins);
+        obj.nextLine();
+        return obj.nextLine();
+    }
+
+    private static String[] getListEquipement(){
+        InputStream inslist = null;
+        try {
+            inslist = new FileInputStream("data/liste.txt");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        String[] liste=new String[10];
+        Scanner list = new Scanner(inslist);
+        int cpt=0;
+        while (list.hasNextLine()){
+            liste[cpt]=list.nextLine();
+            cpt++;
+        }
+        return liste;
+    }
+
+    private static String[] getEquipementAffecte(String fichier){
+
+            InputStream ins = null;
+            try {
+                ins = new FileInputStream("data/cberthier.txt");
+            } catch (FileNotFoundException ex) {
+                ex.printStackTrace();
+            }
+            Scanner obj = new Scanner(ins);
+
+        String[] affectation=new String[10];
+        while (obj.hasNextLine()){
+            if (obj.nextLine()==""){
+                int compteur=0;
+                while (obj.hasNextLine()){
+                    affectation[compteur]= obj.nextLine();
+                    compteur++;
+                }
+            }
+        }
+        return affectation;
+    }
+
+    }
