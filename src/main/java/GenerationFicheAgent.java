@@ -8,8 +8,10 @@
     public static void main(String[] args)  {
         String nom=getNomAgent("data/cberthier.txt");
         String prenom=getPrenomAgent("data/cberthier.txt");
+        System.out.println("coucou");
         String[] listeEquipement=getListEquipement();
         String[] listeEquipementAffecte=getEquipementAffecte("data/cberthier.txt");
+        System.out.println("blabla");
 
     HtmlView html=StaticHtml.view(v -> v
             .html()
@@ -28,6 +30,29 @@
             .div().attrClass("CNI")
             .img().attrSrc("data/cberthier.jpg").attrAlt("CNI")
             .__()
+            .__()
+            .div().attrClass("listeEquipement")
+            .p().text(listeEquipement[0])
+            .__()
+            .p().text(listeEquipement[1])
+            .__()
+            .p().text(listeEquipement[2])
+            .__()
+            .p().text(listeEquipement[3])
+            .__()
+            .p().text(listeEquipement[4])
+            .__()
+            .p().text(listeEquipement[5])
+            .__()
+            .p().text(listeEquipement[6])
+            .__()
+            .p().text(listeEquipement[7])
+            .__()
+            .p().text(listeEquipement[8])
+            .__()
+            .p().text(listeEquipement[9])
+            .__()
+            .p().text(listeEquipement[9])
             .__()
             .__()
             .__()
