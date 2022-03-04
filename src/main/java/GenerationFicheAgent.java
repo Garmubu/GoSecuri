@@ -1,19 +1,37 @@
-    import htmlflow.*;
-    import org.xmlet.htmlapifaster.EnumRelType;
+
 
     import java.io.*;
+    import java.nio.charset.Charset;
+    import java.nio.charset.StandardCharsets;
+    import java.nio.file.Files;
+    import java.nio.file.Path;
+    import java.nio.file.Paths;
     import java.util.Scanner;
 
+    import static j2html.TagCreator.*;
+
     public class GenerationFicheAgent {
-    public static void main(String[] args)  {
+    public static void main(String[] args) throws IOException {
         String nom=getNomAgent("data/cberthier.txt");
         String prenom=getPrenomAgent("data/cberthier.txt");
-        System.out.println("coucou");
         String[] listeEquipement=getListEquipement();
         String[] listeEquipementAffecte=getEquipementAffecte("data/cberthier.txt");
+        Generateur g1=new Generateur();
+        System.out.println(Generateur.genererHtml());
+        File file = new File("FicheAgent.html");
+        FileWriter fw = new FileWriter(file.getAbsoluteFile());
+        BufferedWriter bw = new BufferedWriter(fw);
+        bw.write(Generateur.genererHtml());
+        bw.close();
 
 
-    HtmlView html=StaticHtml.view(v -> v
+
+
+
+
+
+
+    /*HtmlView html=StaticHtml.view(v -> v
             .html()
             .head()
             .link().attrRel(EnumRelType.STYLESHEET).attrHref("styles.css")
@@ -63,7 +81,7 @@
                             .write();                       // 3) write to details.html file                     // 2) print to the standard output
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     private static String getNomAgent(String name){

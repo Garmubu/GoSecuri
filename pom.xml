@@ -14,10 +14,11 @@
     </properties>
 <dependencies>
     <dependency>
-        <groupId>com.github.xmlet</groupId>
-        <artifactId>htmlflow</artifactId>
-        <version>3.9</version>
-    </dependency></dependencies>
+        <groupId>com.j2html</groupId>
+        <artifactId>j2html</artifactId>
+        <version>1.5.0</version>
+    </dependency>
+</dependencies>
 
 
 </project>
