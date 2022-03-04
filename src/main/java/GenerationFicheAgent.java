@@ -8,7 +8,7 @@
     public static void main(String[] args)  {
         String nom=getNomAgent("data/cberthier.txt");
         String prenom=getPrenomAgent("data/cberthier.txt");
-
+        System.out.println("coucou");
         String[] listeEquipement=getListEquipement();
         String[] listeEquipementAffecte=getEquipementAffecte("data/cberthier.txt");
 
