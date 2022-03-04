@@ -2,16 +2,19 @@
     import org.xmlet.htmlapifaster.EnumRelType;
 
     import java.io.*;
+    import java.util.ArrayList;
     import java.util.Scanner;
 
     public class GenerationFicheAgent {
     public static void main(String[] args)  {
-        String nom=getNomAgent("data/cberthier.txt");
-        String prenom=getPrenomAgent("data/cberthier.txt");
-        System.out.println("coucou");
-        String[] listeEquipement=getListEquipement();
+        Agent agent = new Agent();
+        Equipement equipement = new Equipement();
+        agent.getInfoAgent("data/cberthier.txt","nom");
+        agent.getInfoAgent("data/cberthier.txt","prenom");
+        agent.getInfoAgent("data/cberthier.txt","mission");
+        ArrayList<Equipement> listeEquipement = getListEquipement();
         String[] listeEquipementAffecte=getEquipementAffecte("data/cberthier.txt");
-        System.out.println("blabla");
+
 
     HtmlView html=StaticHtml.view(v -> v
             .html()
@@ -24,7 +27,7 @@
             .body()
             .div().attrClass("conteneur")
             .div().attrClass("nom")
-            .p().text(nom)
+            .p().text(agent.getNom())
             .__()
             .__()
             .div().attrClass("CNI")
@@ -32,27 +35,6 @@
             .__()
             .__()
             .div().attrClass("listeEquipement")
-            .p().text(listeEquipement[0])
-            .__()
-            .p().text(listeEquipement[1])
-            .__()
-            .p().text(listeEquipement[2])
-            .__()
-            .p().text(listeEquipement[3])
-            .__()
-            .p().text(listeEquipement[4])
-            .__()
-            .p().text(listeEquipement[5])
-            .__()
-            .p().text(listeEquipement[6])
-            .__()
-            .p().text(listeEquipement[7])
-            .__()
-            .p().text(listeEquipement[8])
-            .__()
-            .p().text(listeEquipement[9])
-            .__()
-            .p().text(listeEquipement[9])
             .__()
             .__()
             .__()
@@ -66,30 +48,7 @@
         }
     }
 
-    private static String getNomAgent(String name){
-        InputStream ins = null;
-        try {
-            ins = new FileInputStream(name);
-        } catch (FileNotFoundException ex) {
-            ex.printStackTrace();
-        }
-        Scanner obj = new Scanner(ins);
-        return obj.nextLine();
-    }
-
-    private static String getPrenomAgent(String fichier){
-        InputStream ins = null;
-        try {
-            ins = new FileInputStream(fichier);
-        } catch (FileNotFoundException ex) {
-            ex.printStackTrace();
-        }
-        Scanner obj = new Scanner(ins);
-        obj.nextLine();
-        return obj.nextLine();
-    }
-
-    private static String[] getListEquipement(){
+    /*private static String[] getListEquipement(){
         InputStream inslist = null;
         try {
             inslist = new FileInputStream("data/liste.txt");
@@ -104,8 +63,26 @@
             cpt++;
         }
         return liste;
-    }
+    }*/
+        private static ArrayList<Equipement> getListEquipement(){
+            InputStream inslist = null;
+            try {
+                inslist = new FileInputStream("data/liste.txt");
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            ArrayList<Equipement> liste=new ArrayList<>();
 
+            Scanner list = new Scanner(inslist);
+            int cpt=0;
+            while (list.hasNextLine()){
+                Equipement equipement = new Equipement();
+                equipement.setNom(list.nextLine());
+                liste.add(equipement);
+                cpt++;
+            }
+            return liste;
+        }
     private static String[] getEquipementAffecte(String fichier){
 
             InputStream ins = null;
