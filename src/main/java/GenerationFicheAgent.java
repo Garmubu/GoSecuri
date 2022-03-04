@@ -11,7 +11,7 @@
         System.out.println("coucou");
         String[] listeEquipement=getListEquipement();
         String[] listeEquipementAffecte=getEquipementAffecte("data/cberthier.txt");
-        System.out.println("blabla");
+
 
     HtmlView html=StaticHtml.view(v -> v
             .html()
