@@ -22,12 +22,15 @@ public class Generateur {
         */
         System.out.println(Generateur.genererHtml(agent));
 
-        FileWriter fw = new FileWriter("C:/wamp/www/GoSecuri/FicheAgent.html");
+        FileWriter fw = new FileWriter("FicheAgent.html");
         BufferedWriter bw = new BufferedWriter(fw);
         bw.write(Generateur.genererHtml(agent));
         bw.close();
-        FileWriter f2 = new FileWriter("C:/wamp/www/GoSecuri/Accueil.html");
+        FileWriter f2 = new FileWriter("Accueil.html");
         String url_open ="http://localhost/GoSecuri/FicheAgent.html";
+        BufferedWriter b1 = new BufferedWriter(f2);
+        b1.write(Generateur.genererHtml(agent));
+        b1.close();
         java.awt.Desktop.getDesktop().browse(java.net.URI.create(url_open));
     }
         public static String genererHtml(Agent agent){
