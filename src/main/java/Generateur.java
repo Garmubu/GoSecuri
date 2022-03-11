@@ -1,13 +1,7 @@
-import j2html.attributes.Attr;
-import j2html.tags.specialized.DivTag;
-import j2html.tags.specialized.PTag;
-
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import static j2html.TagCreator.*;
 
