@@ -3,6 +3,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static j2html.TagCreator.*;
+
+
 public class Generateur {
     public static void main(String[] args) throws IOException {
         Agent agent=new Agent();
