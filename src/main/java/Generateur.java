@@ -1,6 +1,4 @@
-import j2html.attributes.Attr;
-import j2html.tags.specialized.DivTag;
-import j2html.tags.specialized.PTag;
+import j2html.tags.DomContent;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -16,24 +14,23 @@ public class Generateur {
     public static void main(String[] args) throws IOException {
         Agent agent=new Agent();
         agent.getInfoAgent("data/cberthier.txt");
-        ArrayList<Agent> agents = agent.getAllAgent();
+        ArrayList<Agent> agents = Agent.getAllAgent();
         /*String nom = getNomAgent("data/cberthier.txt");
         String prenom = getPrenomAgent("data/cberthier.txt");
         String[] listeEquipement = getListEquipement();
         String[] listeEquipementAffecte = getEquipementAffecte("data/cberthier.txt");
         */
         System.out.println(Generateur.genererHtml(agent));
-
         FileWriter fw = new FileWriter("FicheAgent.html");
         BufferedWriter bw = new BufferedWriter(fw);
         bw.write(Generateur.genererHtml(agent));
         bw.close();
         FileWriter f2 = new FileWriter("Accueil.html");
-        String url_open ="http://localhost/GoSecuri/FicheAgent.html";
+       // String url_open ="/home/guicheri/IdeaProjects/GoSecuri/FicheAgent.html";
         BufferedWriter b1 = new BufferedWriter(f2);
         b1.write(Generateur.genererAccueil(agents));
         b1.close();
-        java.awt.Desktop.getDesktop().browse(java.net.URI.create(url_open));
+       // java.awt.Desktop.getDesktop().browse(java.net.URI.create(url_open));
     }
         public static String genererHtml(Agent agent){
         Equipement e1=new Equipement();
@@ -66,14 +63,24 @@ public class Generateur {
     }
 
     public static String genererAccueil(ArrayList<Agent> agents){
-        return head(
+        String  render = html(
+                (DomContent) head(
                 title("Fiche Accueil"),
                 link().withRel("stylesheet").withHref("styles.css")
-        )/*
-        body(
-                main(attrs("content")
-
-        )*/
-                .render();
+        ),
+                body(
+                j2html.TagCreator.main(attrs(".content")
+                        , div(attrs(".CNI")
+                        , div(attrs(".ListeAgent"),
+                                each(agents, agent ->
+                                        div(attrs(".agent"),
+                                                a(String.valueOf(agent.getNom())).withHref("https://www.google.com/"))
+                                )
+                        )
+                )
+        )
+            )
+        ).render();
+        return render;
     }
 }
