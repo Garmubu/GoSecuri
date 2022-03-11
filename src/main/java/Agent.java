@@ -67,4 +67,17 @@ public class Agent {
         }*/
     }
 
+    public ArrayList<Agent> getAllAgent() {
+        ArrayList<Agent> agents = new ArrayList<>();
+        InputStream ins = null;
+        try {
+            ins = new FileInputStream("data/staff.txt");
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        Scanner obj = new Scanner(ins);
+
+
+        return agents;
+    }
 }

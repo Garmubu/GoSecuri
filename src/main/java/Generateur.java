@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import static j2html.TagCreator.*;
 
@@ -15,6 +16,7 @@ public class Generateur {
     public static void main(String[] args) throws IOException {
         Agent agent=new Agent();
         agent.getInfoAgent("data/cberthier.txt");
+        ArrayList<Agent> agents = agent.getAllAgent();
         /*String nom = getNomAgent("data/cberthier.txt");
         String prenom = getPrenomAgent("data/cberthier.txt");
         String[] listeEquipement = getListEquipement();
@@ -29,7 +31,7 @@ public class Generateur {
         FileWriter f2 = new FileWriter("Accueil.html");
         String url_open ="http://localhost/GoSecuri/FicheAgent.html";
         BufferedWriter b1 = new BufferedWriter(f2);
-        b1.write(Generateur.genererHtml(agent));
+        b1.write(Generateur.genererAccueil(agents));
         b1.close();
         java.awt.Desktop.getDesktop().browse(java.net.URI.create(url_open));
     }
@@ -63,7 +65,7 @@ public class Generateur {
             return render;
     }
 
-    public static String genererAccueil(){
+    public static String genererAccueil(ArrayList<Agent> agents){
         return head(
                 title("Fiche Accueil"),
                 link().withRel("stylesheet").withHref("styles.css")
