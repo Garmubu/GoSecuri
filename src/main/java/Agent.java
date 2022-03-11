@@ -2,7 +2,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class Agent {
@@ -43,7 +42,7 @@ public class Agent {
         this.prenom = prenom;
     }
 
-    public void getInfoAgent(String fichier, String variable) {
+    public void getInfoAgent(String fichier) {
         InputStream ins = null;
         try {
             ins = new FileInputStream(fichier);
@@ -51,7 +50,10 @@ public class Agent {
             ex.printStackTrace();
         }
         Scanner obj = new Scanner(ins);
-        if (Objects.equals(variable, "nom")) {
+        this.nom=obj.nextLine();
+        this.prenom=obj.nextLine();
+        this.mission=obj.nextLine();
+        /*if (Objects.equals(variable, "nom")) {
             this.setNom(obj.nextLine());
         }
         if (Objects.equals(variable, "prenom")) {
@@ -62,7 +64,7 @@ public class Agent {
             obj.nextLine();
             obj.nextLine();
             this.setMission(obj.nextLine());
-        }
+        }*/
     }
 
 }
