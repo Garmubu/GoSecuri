@@ -35,7 +35,6 @@ public class Equipement {
 
         Scanner list = new Scanner(inslist);
         if (parametre == "equipement"){
-
         }
         int cpt=0;
         while (list.hasNextLine()){
@@ -44,10 +43,7 @@ public class Equipement {
             String[] ligneSepare=ligne.split(";");
             equipement.setNomComplet(ligneSepare[1]);
             equipement.setNom(ligneSepare[0]);
-
             liste.add(equipement);
-
-
             cpt++;
         }
         return liste;
