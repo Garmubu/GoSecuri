@@ -71,6 +71,7 @@ public class Generateur {
                     )
             ).renderFormatted();
             return render;
+//tgttgtgggtgtg
     }
 
     public static String genererAccueil(ArrayList<Agent> agentList){
