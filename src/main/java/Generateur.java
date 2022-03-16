@@ -1,4 +1,6 @@
 import java.io.BufferedWriter;
+import j2html.tags.DomContent;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -10,12 +12,9 @@ import static j2html.TagCreator.*;
 
 public class Generateur {
     public static void main(String[] args) throws IOException {
-
         Agent agent=new Agent();
         agent.getInfoAgent("data/cberthier.txt");
         ArrayList<Agent> agents = agent.getAllAgent();
-
-        System.out.println();
         /*String nom = getNomAgent("data/cberthier.txt");
         String prenom = getPrenomAgent("data/cberthier.txt");
         String[] listeEquipement = getListEquipement();
@@ -28,7 +27,7 @@ public class Generateur {
         bw.write(Generateur.genererHtml(agent));
         bw.close();
         FileWriter f2 = new FileWriter("Accueil.html");
-        String url_open ="C:/Users/killi/IdeaProjects/GoSecuri/FicheAgent.html";
+        String url_open ="http://localhost/GoSecuri/FicheAgent.html";
         BufferedWriter b1 = new BufferedWriter(f2);
         b1.write(Generateur.genererAccueil(agents));
         b1.close();
@@ -69,14 +68,24 @@ public class Generateur {
     }
 
     public static String genererAccueil(ArrayList<Agent> agents){
-        return head(
+        String  render = html(
+                (DomContent) head(
                 title("Fiche Accueil"),
                 link().withRel("stylesheet").withHref("styles.css")
-        )/*
-        body(
-                main(attrs("content")
-
-        )*/
-                .render();
+        ),
+                body(
+                j2html.TagCreator.main(attrs(".content")
+                        , div(attrs(".CNI")
+                        , div(attrs(".ListeAgent"),
+                                each(agents, agent ->
+                                        div(attrs(".agent"),
+                                                a(String.valueOf(agent.getNom())).withHref("https://www.google.com/"))
+                                )
+                        )
+                )
+        )
+            )
+        ).render();
+        return render;
     }
 }

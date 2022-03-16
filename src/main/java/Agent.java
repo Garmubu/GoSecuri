@@ -100,8 +100,8 @@ public class Agent {
         }*/
     }
 
-    public ArrayList<Agent> getAllAgent() {
-        ArrayList<Agent> agents = new ArrayList<>();
+    public static ArrayList<Agent> getAllAgent() {
+        ArrayList<Agent> listAgents = new ArrayList<>();
         InputStream ins = null;
         try {
             ins = new FileInputStream("data/staff.txt");
@@ -109,8 +109,13 @@ public class Agent {
             ex.printStackTrace();
         }
         Scanner obj = new Scanner(ins);
+        while (obj.hasNextLine()){
+            Agent agent = new Agent();
+            agent.setNom(obj.nextLine());
+            listAgents.add(agent);
+        }
 
 
-        return agents;
+        return listAgents;
     }
 }
