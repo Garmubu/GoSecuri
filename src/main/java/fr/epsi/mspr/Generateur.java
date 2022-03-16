@@ -24,7 +24,6 @@ public class Generateur {
             @Override
             public void run() {
                 FileWriter f2 = null;
-                // String url_open ="C:/Users/killi/IdeaProjects/GoSecuri/FicheAgent.html";
                 try {
                     f2 = new FileWriter("Accueil.html");
                     BufferedWriter b1 = new BufferedWriter(f2);
@@ -33,9 +32,11 @@ public class Generateur {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+
             }
         };
         threadAccueil.start();
+
        // java.awt.Desktop.getDesktop().browse(java.net.URI.create(url_open));
     }
         public static String genererHtml(Agent agent){

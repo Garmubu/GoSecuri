@@ -11,7 +11,7 @@ public class Agent implements Comparable<Agent>{
     private String nom;
     private String prenom;
     private String mission;
-    private ArrayList<Equipement> equipement=new ArrayList<Equipement>();
+    private ArrayList<Equipement> equipement=new ArrayList<>();
 
     public String getMission() {
         return mission;
@@ -54,6 +54,7 @@ public class Agent implements Comparable<Agent>{
             e.setNom(obj.nextLine());
             equipement.add(e);
         }
+        obj.close();
         return equipement;
     }
 
@@ -89,6 +90,7 @@ public class Agent implements Comparable<Agent>{
         this.nom=obj.nextLine();
         this.prenom=obj.nextLine();
         this.mission=obj.nextLine();
+        obj.close();
     }
 
     public static ArrayList<Agent> getAllAgent() {
@@ -113,6 +115,7 @@ public class Agent implements Comparable<Agent>{
         }
 
         Collections.sort(listAgents);
+        obj.close();
         return listAgents;
     }
 
