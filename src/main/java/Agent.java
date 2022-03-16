@@ -2,9 +2,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 
-public class Agent {
+public class Agent implements Comparable<Agent>{
     private String nom;
     private String prenom;
     private String mission;
@@ -109,7 +111,12 @@ public class Agent {
             listAgents.add(agent);
         }
 
-
+        Collections.sort(listAgents);
         return listAgents;
+    }
+
+    @Override
+    public int compareTo(Agent o) {
+        return this.nom.compareTo(o.nom);
     }
 }

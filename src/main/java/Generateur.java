@@ -45,7 +45,7 @@ public class Generateur {
                                     , div(attrs(".CNI"),
                                             img().withSrc("data/"+agent.getPrenom()+""+agent.getNom()+".jpg").withAlt("CNI")))
                                     , div(attrs(".ListeEquipement"),
-                                            p(attrs("#pEquipement"),"Liste des équipements alloué"),
+                                            h1(attrs("#pEquipement"),"Liste des équipements alloué"),
                                             each(listeEquipement, equipement ->
                                                             div(attrs(".equipement"),
                                                                    p(String.valueOf(equipement.getNomComplet())),
@@ -70,17 +70,18 @@ public class Generateur {
                 link().withRel("stylesheet").withHref("styles.css")
         ),
                 body(
-                j2html.TagCreator.main(attrs(".content")
-                        , div(attrs(".CNI")
+                j2html.TagCreator.main(attrs(".content"),
+                        h1(attrs(".titre"),"Liste des employés")
                         , div(attrs(".ListeAgent"),
                                 each(agentList, agent ->
                                         div(attrs(".agent"),
-                                                a(String.valueOf(agent.getNom())).withHref("https://www.google.com/"))
+                                                a(String.valueOf(agent.getNom())).withHref("C:/Users/killi/IdeaProjects/GoSecuri/FicheAgent"
+                                                        +agent.getNom()+".html"))
                                 )
                         )
                 )
         )
-            )
+
         ).renderFormatted();
         return render;
     }
