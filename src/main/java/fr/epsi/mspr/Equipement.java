@@ -1,3 +1,4 @@
+package fr.epsi.mspr;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;

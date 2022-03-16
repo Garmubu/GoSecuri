@@ -1,9 +1,10 @@
+package fr.epsi.mspr;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Scanner;
 
 public class Agent implements Comparable<Agent>{

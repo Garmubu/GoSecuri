@@ -1,11 +1,11 @@
+package fr.epsi.mspr;
+
 import j2html.tags.DomContent;
 
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import static j2html.TagCreator.*;
 
@@ -34,7 +34,7 @@ public class Generateur {
         agent.getEquipement("data/"+agent.getPrenom()+""+agent.getNom()+".txt");
             String render = html(
                     head(
-                            title("Fiche Agent"),
+                            title("Fiche fr.epsi.mspr.Agent"),
                             link().withRel("stylesheet").withHref("styles.css")
                     ),
                     body(
