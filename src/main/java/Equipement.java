@@ -4,6 +4,15 @@ import java.util.Scanner;
 
 public class Equipement {
     private String nom;
+    private String nomComplet;
+
+    public String getNomComplet() {
+        return nomComplet;
+    }
+
+    public void setNomComplet(String nomComplet) {
+        this.nomComplet = nomComplet;
+    }
 
     public String getNom() {
         return nom;
@@ -13,7 +22,7 @@ public class Equipement {
         this.nom = nom;
     }
 
-    public ArrayList<Equipement> getListEquipement(String parametre){
+    public static ArrayList<Equipement> getListEquipement(String parametre){
         InputStream inslist = null;
         try {
             if (parametre == "equipement"){
@@ -31,8 +40,14 @@ public class Equipement {
         int cpt=0;
         while (list.hasNextLine()){
             Equipement equipement = new Equipement();
-            equipement.setNom(list.nextLine());
+            String ligne=list.nextLine();
+            String[] ligneSepare=ligne.split(";");
+            equipement.setNomComplet(ligneSepare[1]);
+            equipement.setNom(ligneSepare[0]);
+
             liste.add(equipement);
+
+
             cpt++;
         }
         return liste;
