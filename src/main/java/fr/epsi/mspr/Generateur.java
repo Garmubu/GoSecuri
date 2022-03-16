@@ -68,7 +68,7 @@ public class Generateur {
                                                      )
                                     )
                             )
-                    )
+                    )//test
             ).renderFormatted();
             return render;
 //tgttgtgggtgtg
