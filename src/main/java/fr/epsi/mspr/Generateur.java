@@ -24,19 +24,11 @@ public class Generateur {
             @Override
             public void run() {
                 FileWriter f2 = null;
+                // String url_open ="C:/Users/killi/IdeaProjects/GoSecuri/FicheAgent.html";
                 try {
                     f2 = new FileWriter("Accueil.html");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                // String url_open ="C:/Users/killi/IdeaProjects/GoSecuri/FicheAgent.html";
-                BufferedWriter b1 = new BufferedWriter(f2);
-                try {
+                    BufferedWriter b1 = new BufferedWriter(f2);
                     b1.write(Generateur.genererAccueil(agentList));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                try {
                     b1.close();
                 } catch (IOException e) {
                     e.printStackTrace();
