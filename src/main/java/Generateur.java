@@ -15,30 +15,28 @@ public class Generateur {
         Agent agent=new Agent();
         ArrayList<Agent> agentList = Agent.getAllAgent();
         agent.getInfoAgent("data/cberthier.txt");
+        ArrayList<Agent> agents = Agent.getAllAgent();
         /*String nom = getNomAgent("data/cberthier.txt");
         String prenom = getPrenomAgent("data/cberthier.txt");
         String[] listeEquipement = getListEquipement();
         String[] listeEquipementAffecte = getEquipementAffecte("data/cberthier.txt");
         */
         System.out.println(Generateur.genererHtml(agent));
+
         FileWriter fw = new FileWriter("FicheAgent.html");
         BufferedWriter bw = new BufferedWriter(fw);
         bw.write(Generateur.genererHtml(agent));
         bw.close();
         FileWriter f2 = new FileWriter("Accueil.html");
-       // String url_open ="/home/guicheri/IdeaProjects/GoSecuri/FicheAgent.html";
+        String url_open ="http://localhost/GoSecuri/FicheAgent.html";
         BufferedWriter b1 = new BufferedWriter(f2);
         b1.write(Generateur.genererAccueil(agentList));
         b1.close();
-       // java.awt.Desktop.getDesktop().browse(java.net.URI.create(url_open));
+        java.awt.Desktop.getDesktop().browse(java.net.URI.create(url_open));
     }
         public static String genererHtml(Agent agent){
-        Equipement e1=new Equipement();
-        Equipement e2=new Equipement();
-        ArrayList<Equipement> listeEquipement=new ArrayList<>(2);
-        listeEquipement.add(e1);
-        listeEquipement.add(e2);
-
+        ArrayList<Equipement> listeEquipement=Equipement.getListEquipement("equipement");
+        agent.getEquipement("data/cberthier.txt");
             String render = html(
                     head(
                             title("Fiche Agent"),
@@ -46,19 +44,27 @@ public class Generateur {
                     ),
                     body(
                             j2html.TagCreator.main(attrs(".content"),
-                                    p(agent.getNom())
+                                    div(attrs(".user"),
+                                    div(attrs(".nom"),
+                                    p(agent.getNom()))
                                     , div(attrs(".CNI"),
-                                            img().withSrc("data/cberthier.jpg").withAlt("CNI"))
+                                            img().withSrc("data/cberthier.jpg").withAlt("CNI")))
                                     , div(attrs(".ListeEquipement"),
+                                            p(attrs("#pEquipement"),"Liste des équipements alloué"),
                                             each(listeEquipement, equipement ->
-                                                    div(attrs(".equipement"),
-                                                            p(String.valueOf(equipement)))
+                                                            div(attrs(".equipement"),
+                                                                   p(String.valueOf(equipement.getNomComplet())),
+                                                                        iffElse(agent.possedeEquipement(equipement.getNom()),
+                                                                                form(input().withType("checkbox").isChecked().isDisabled()),
+                                                                                form(input().withType("checkbox").isDisabled())
 
-                                            )
+                                                                    )
+                                                            )
+                                                     )
                                     )
                             )
                     )
-            ).render();
+            ).renderFormatted();
             return render;
     }
 

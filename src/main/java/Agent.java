@@ -8,7 +8,7 @@ public class Agent {
     private String nom;
     private String prenom;
     private String mission;
-    private ArrayList<Equipement> equipement;
+    private ArrayList<Equipement> equipement=new ArrayList<Equipement>();
 
     public String getMission() {
         return mission;
@@ -17,8 +17,40 @@ public class Agent {
     public void setMission(String mission) {
         this.mission = mission;
     }
+    public boolean possedeEquipement(String nom){
+        boolean resultat = false;
+        for (Equipement e:equipement
+             ) {
+            if (e.getNom().equals(nom)){
+                return true;
+            }else{
+                resultat=false;
+            }
+        }
+        return resultat;
+    }
 
-    public ArrayList<Equipement> getEquipement() {
+    public ArrayList<Equipement> getEquipement(String fichier) {
+        if (!equipement.isEmpty()) {
+            equipement.clear();
+        }
+        InputStream ins = null;
+        try {
+            ins = new FileInputStream(fichier);
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        Scanner obj = new Scanner(ins);
+        obj.nextLine();
+        obj.nextLine();
+        obj.nextLine();
+        obj.nextLine();
+        obj.nextLine();
+        while (obj.hasNextLine()){
+            Equipement e=new Equipement();
+            e.setNom(obj.nextLine());
+            equipement.add(e);
+        }
         return equipement;
     }
 
@@ -41,6 +73,7 @@ public class Agent {
     public void setPrenom(String prenom) {
         this.prenom = prenom;
     }
+
 
     public void getInfoAgent(String fichier) {
         InputStream ins = null;
