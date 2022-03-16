@@ -23,8 +23,18 @@
     --vert: #659224;
     --bleu: #379EC1;
 }
+a{
+    text-decoration: none;
+   color: black;
+}
+a:hover {
+    color: #379EC1;
+}
 
-
+h1{
+    font-family: "Roboto medium";
+    text-align: center;
+}
 
 html{
     font-family: "Roboto light";
@@ -39,11 +49,15 @@ title{
     width: 100%;
     justify-content: center;
 }
+img{
+    max-width: 50vh;
+}
 .user{
     display: flex;
     justify-content: space-between;
     align-items: start;
 }
+
 .nom{
     border: 2px solid black;
     padding: 5px;
@@ -65,4 +79,19 @@ p{
 }
 .CNI{
     float: right;
+    max-width: 200vh;
+    max-height: 200vh;
+}
+.ListeAgent{
+    display: flex;
+    flex-direction: column;
+
+    justify-content: space-around;
+    align-items: center;
+}
+.agent{
+    margin-top: 10px;
+    width: 50%;
+    text-align: center;
+
 }

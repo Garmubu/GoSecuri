@@ -1,11 +1,11 @@
+package fr.epsi.mspr;
+
 import j2html.tags.DomContent;
 
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import static j2html.TagCreator.*;
 
@@ -19,14 +19,31 @@ public class Generateur {
             BufferedWriter bw = new BufferedWriter(fw);
             bw.write(Generateur.genererHtml(a));
             bw.close();
-
         }
-
-        FileWriter f2 = new FileWriter("Accueil.html");
-       // String url_open ="C:/Users/killi/IdeaProjects/GoSecuri/FicheAgent.html";
-        BufferedWriter b1 = new BufferedWriter(f2);
-        b1.write(Generateur.genererAccueil(agentList));
-        b1.close();
+        Thread threadAccueil=new Thread() {
+            @Override
+            public void run() {
+                FileWriter f2 = null;
+                try {
+                    f2 = new FileWriter("Accueil.html");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                // String url_open ="C:/Users/killi/IdeaProjects/GoSecuri/FicheAgent.html";
+                BufferedWriter b1 = new BufferedWriter(f2);
+                try {
+                    b1.write(Generateur.genererAccueil(agentList));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    b1.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        threadAccueil.start();
        // java.awt.Desktop.getDesktop().browse(java.net.URI.create(url_open));
     }
         public static String genererHtml(Agent agent){
@@ -34,7 +51,7 @@ public class Generateur {
         agent.getEquipement("data/"+agent.getPrenom()+""+agent.getNom()+".txt");
             String render = html(
                     head(
-                            title("Fiche Agent"),
+                            title("Fiche fr.epsi.mspr.Agent"),
                             link().withRel("stylesheet").withHref("styles.css")
                     ),
                     body(
@@ -45,7 +62,7 @@ public class Generateur {
                                     , div(attrs(".CNI"),
                                             img().withSrc("data/"+agent.getPrenom()+""+agent.getNom()+".jpg").withAlt("CNI")))
                                     , div(attrs(".ListeEquipement"),
-                                            p(attrs("#pEquipement"),"Liste des équipements alloué"),
+                                            h1(attrs("#pEquipement"),"Liste des équipements alloué"),
                                             each(listeEquipement, equipement ->
                                                             div(attrs(".equipement"),
                                                                    p(String.valueOf(equipement.getNomComplet())),
@@ -70,17 +87,18 @@ public class Generateur {
                 link().withRel("stylesheet").withHref("styles.css")
         ),
                 body(
-                j2html.TagCreator.main(attrs(".content")
-                        , div(attrs(".CNI")
+                j2html.TagCreator.main(attrs(".content"),
+                        h1(attrs(".titre"),"Liste des employés")
                         , div(attrs(".ListeAgent"),
                                 each(agentList, agent ->
                                         div(attrs(".agent"),
-                                                a(String.valueOf(agent.getNom())).withHref("https://www.google.com/"))
+                                                a(String.valueOf(agent.getNom())).withHref("C:/Users/killi/IdeaProjects/GoSecuri/FicheAgent"
+                                                        +agent.getNom()+".html"))
                                 )
                         )
                 )
         )
-            )
+
         ).renderFormatted();
         return render;
     }
