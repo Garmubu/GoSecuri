@@ -15,12 +15,6 @@ public class Generateur {
         Agent agent=new Agent();
         ArrayList<Agent> agentList = Agent.getAllAgent();
         agent.getInfoAgent("data/cberthier.txt");
-        ArrayList<Agent> agents = Agent.getAllAgent();
-        /*String nom = getNomAgent("data/cberthier.txt");
-        String prenom = getPrenomAgent("data/cberthier.txt");
-        String[] listeEquipement = getListEquipement();
-        String[] listeEquipementAffecte = getEquipementAffecte("data/cberthier.txt");
-        */
         System.out.println(Generateur.genererHtml(agent));
 
         FileWriter fw = new FileWriter("FicheAgent.html");

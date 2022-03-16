@@ -86,18 +86,6 @@ public class Agent {
         this.nom=obj.nextLine();
         this.prenom=obj.nextLine();
         this.mission=obj.nextLine();
-        /*if (Objects.equals(variable, "nom")) {
-            this.setNom(obj.nextLine());
-        }
-        if (Objects.equals(variable, "prenom")) {
-            obj.nextLine();
-            this.setPrenom(obj.nextLine());
-        }
-        if (Objects.equals(variable, "mission")) {
-            obj.nextLine();
-            obj.nextLine();
-            this.setMission(obj.nextLine());
-        }*/
     }
 
     public static ArrayList<Agent> getAllAgent() {
