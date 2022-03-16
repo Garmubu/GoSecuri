@@ -86,22 +86,12 @@ public class Agent {
         this.nom=obj.nextLine();
         this.prenom=obj.nextLine();
         this.mission=obj.nextLine();
-        /*if (Objects.equals(variable, "nom")) {
-            this.setNom(obj.nextLine());
-        }
-        if (Objects.equals(variable, "prenom")) {
-            obj.nextLine();
-            this.setPrenom(obj.nextLine());
-        }
-        if (Objects.equals(variable, "mission")) {
-            obj.nextLine();
-            obj.nextLine();
-            this.setMission(obj.nextLine());
-        }*/
     }
 
     public static ArrayList<Agent> getAllAgent() {
         ArrayList<Agent> listAgents = new ArrayList<>();
+        String firstLetter ;
+        String nomPrenom ;
         InputStream ins = null;
         try {
             ins = new FileInputStream("data/staff.txt");
@@ -111,7 +101,11 @@ public class Agent {
         Scanner obj = new Scanner(ins);
         while (obj.hasNextLine()){
             Agent agent = new Agent();
-            agent.setNom(obj.nextLine());
+            nomPrenom = obj.nextLine();
+            firstLetter = nomPrenom.substring(0,1);
+            nomPrenom = nomPrenom.replaceFirst(firstLetter,"");
+            agent.setPrenom(firstLetter);
+            agent.setNom(nomPrenom);
             listAgents.add(agent);
         }
 

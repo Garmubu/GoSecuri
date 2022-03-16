@@ -1,6 +1,6 @@
-import java.io.BufferedWriter;
 import j2html.tags.DomContent;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -13,13 +13,8 @@ import static j2html.TagCreator.*;
 public class Generateur {
     public static void main(String[] args) throws IOException {
         Agent agent=new Agent();
+        ArrayList<Agent> agentList = Agent.getAllAgent();
         agent.getInfoAgent("data/cberthier.txt");
-        ArrayList<Agent> agents = agent.getAllAgent();
-        /*String nom = getNomAgent("data/cberthier.txt");
-        String prenom = getPrenomAgent("data/cberthier.txt");
-        String[] listeEquipement = getListEquipement();
-        String[] listeEquipementAffecte = getEquipementAffecte("data/cberthier.txt");
-        */
         System.out.println(Generateur.genererHtml(agent));
 
         FileWriter fw = new FileWriter("FicheAgent.html");
@@ -29,7 +24,7 @@ public class Generateur {
         FileWriter f2 = new FileWriter("Accueil.html");
         String url_open ="http://localhost/GoSecuri/FicheAgent.html";
         BufferedWriter b1 = new BufferedWriter(f2);
-        b1.write(Generateur.genererAccueil(agents));
+        b1.write(Generateur.genererAccueil(agentList));
         b1.close();
         java.awt.Desktop.getDesktop().browse(java.net.URI.create(url_open));
     }
@@ -67,7 +62,7 @@ public class Generateur {
             return render;
     }
 
-    public static String genererAccueil(ArrayList<Agent> agents){
+    public static String genererAccueil(ArrayList<Agent> agentList){
         String  render = html(
                 (DomContent) head(
                 title("Fiche Accueil"),
@@ -77,7 +72,7 @@ public class Generateur {
                 j2html.TagCreator.main(attrs(".content")
                         , div(attrs(".CNI")
                         , div(attrs(".ListeAgent"),
-                                each(agents, agent ->
+                                each(agentList, agent ->
                                         div(attrs(".agent"),
                                                 a(String.valueOf(agent.getNom())).withHref("https://www.google.com/"))
                                 )
@@ -85,7 +80,7 @@ public class Generateur {
                 )
         )
             )
-        ).render();
+        ).renderFormatted();
         return render;
     }
 }
