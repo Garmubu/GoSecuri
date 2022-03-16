@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Agent implements Comparable<Agent>{
@@ -108,7 +109,7 @@ public class Agent implements Comparable<Agent>{
             firstLetter = nomPrenom.substring(0,1);
             nomPrenom = nomPrenom.replaceFirst(firstLetter,"");
             agent.setPrenom(firstLetter);
-            agent.setNom(nomPrenom);
+            agent.setNom(nomPrenom.replaceFirst(nomPrenom.substring(0,1),nomPrenom.substring(0,1).toUpperCase()));
             listAgents.add(agent);
         }
 
