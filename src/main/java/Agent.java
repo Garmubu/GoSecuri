@@ -69,6 +69,8 @@ public class Agent {
 
     public static ArrayList<Agent> getAllAgent() {
         ArrayList<Agent> listAgents = new ArrayList<>();
+        String firstLetter ;
+        String nomPrenom ;
         InputStream ins = null;
         try {
             ins = new FileInputStream("data/staff.txt");
@@ -78,7 +80,11 @@ public class Agent {
         Scanner obj = new Scanner(ins);
         while (obj.hasNextLine()){
             Agent agent = new Agent();
-            agent.setNom(obj.nextLine());
+            nomPrenom = obj.nextLine();
+            firstLetter = nomPrenom.substring(0,1);
+            nomPrenom = nomPrenom.replaceFirst(firstLetter,"");
+            agent.setPrenom(firstLetter);
+            agent.setNom(nomPrenom);
             listAgents.add(agent);
         }
 
