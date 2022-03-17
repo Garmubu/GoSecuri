@@ -2,6 +2,7 @@ package fr.epsi.mspr;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import j2html.tags.DomContent;
 import java.util.ArrayList;
 
 import static j2html.TagCreator.*;
