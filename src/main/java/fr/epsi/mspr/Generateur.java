@@ -1,7 +1,4 @@
 package fr.epsi.mspr;
-
-import j2html.tags.DomContent;
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -15,10 +12,15 @@ public class Generateur {
 
         ArrayList<Agent> agentList = Agent.getAllAgent();
         for (Agent a:agentList) {
-            FileWriter fw = new FileWriter("FicheAgent"+a.getNom()+".html");
-            BufferedWriter bw = new BufferedWriter(fw);
-            bw.write(Generateur.genererHtml(a));
-            bw.close();
+            FileWriter fw = new FileWriter("FicheAgent" + a.getNom() + ".html");
+            BufferedWriter bw = null;
+            try {
+                bw = new BufferedWriter(fw);
+                bw.write(Generateur.genererHtml(a));
+            } finally {
+                bw.close();
+            }
+
         }
         Thread threadAccueil=new Thread() {
             @Override
@@ -26,9 +28,14 @@ public class Generateur {
                 FileWriter f2 = null;
                 try {
                     f2 = new FileWriter("Accueil.html");
-                    BufferedWriter b1 = new BufferedWriter(f2);
-                    b1.write(Generateur.genererAccueil(agentList));
-                    b1.close();
+                    BufferedWriter b1 = null;
+                    try {
+                        b1 = new BufferedWriter(f2);
+                        b1.write(Generateur.genererAccueil(agentList));
+                    } finally {
+                        b1.close();
+                    }
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -76,7 +83,7 @@ public class Generateur {
 
     public static String genererAccueil(ArrayList<Agent> agentList){
         String  render = html(
-                (DomContent) head(
+                 head(
                 title("Fiche Accueil"),
                 link().withRel("stylesheet").withHref("styles.css")
         ),
