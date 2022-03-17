@@ -1,4 +1,5 @@
 import fr.epsi.mspr.Agent;
+import fr.epsi.mspr.AgentDummy;
 import fr.epsi.mspr.Equipement;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -34,11 +35,11 @@ public class AgentTest {
         boolean test = false;
         ArrayList<Equipement> equipement = new ArrayList<>();
         equipement = getListEquipement("equipement");
+        int cpt=0;
         //QUAND Agent est relié à des equipement
-        //ArrayList<Equipement> equipementAgent = agent1.getEquipement("data/cberthier.txt");
+        ArrayList<Equipement> agentArrayListEquipement = agent1.getEquipement("data/cberthier.txt");
         //ALORS les equipements des agents corresponds à la liste d'equipement possible
-int cpt=0;
-        for ( Equipement equipementAgent : agent1.getEquipement("data/cberthier.txt")){
+        for ( Equipement equipementAgent : agentArrayListEquipement){
             for ( Equipement equipementListe : equipement) {
                 cpt++;
                 if (equipementListe.getNom().equals(equipementAgent.getNom())) {
@@ -52,4 +53,13 @@ int cpt=0;
         }
         assertTrue(test);
     }
+
+    @Test
+    public void testDummy(){
+        var agent =new AgentDummy();
+
+
+    }
+
+
 }
