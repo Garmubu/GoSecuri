@@ -17,7 +17,7 @@ public class Agent implements Comparable<Agent>{
     public String getMission() {
         return mission;
     }
-
+// yo
     public void setMission(String mission) {
         this.mission = mission;
     }
