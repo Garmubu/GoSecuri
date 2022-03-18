@@ -26,7 +26,7 @@ public class Equipement {
     public static ArrayList<Equipement> getListEquipement(String parametre){
         InputStream inslist = null;
         try {
-            if (parametre == "equipement"){
+            if (parametre.equals("equipement")){
                 inslist = new FileInputStream("data/liste.txt");
             }
         } catch (FileNotFoundException e) {
@@ -35,7 +35,7 @@ public class Equipement {
         ArrayList<Equipement> liste=new ArrayList<>();
 
         Scanner list = new Scanner(inslist);
-        if (parametre == "equipement"){
+        if (parametre.equals("equipement")){
         }
         int cpt=0;
         while (list.hasNextLine()){
@@ -47,6 +47,7 @@ public class Equipement {
             liste.add(equipement);
             cpt++;
         }
+        list.close();
         return liste;
     }
 

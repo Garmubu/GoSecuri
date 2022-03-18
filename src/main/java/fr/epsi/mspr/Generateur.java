@@ -1,10 +1,8 @@
 package fr.epsi.mspr;
-
-import j2html.tags.DomContent;
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import j2html.tags.DomContent;
 import java.util.ArrayList;
 
 import static j2html.TagCreator.*;
@@ -15,10 +13,15 @@ public class Generateur {
 
         ArrayList<Agent> agentList = Agent.getAllAgent();
         for (Agent a:agentList) {
-            FileWriter fw = new FileWriter("FicheAgent"+a.getNom()+".html");
-            BufferedWriter bw = new BufferedWriter(fw);
-            bw.write(Generateur.genererHtml(a));
-            bw.close();
+            FileWriter fw = new FileWriter("FicheAgent" + a.getNom() + ".html");
+            BufferedWriter bw = null;
+            try {
+                bw = new BufferedWriter(fw);
+                bw.write(Generateur.genererHtml(a));
+            } finally {
+                bw.close();
+            }
+
         }
         Thread threadAccueil=new Thread() {
             @Override
@@ -26,24 +29,22 @@ public class Generateur {
                 FileWriter f2 = null;
                 try {
                     f2 = new FileWriter("Accueil.html");
+                    BufferedWriter b1 = null;
+                    try {
+                        b1 = new BufferedWriter(f2);
+                        b1.write(Generateur.genererAccueil(agentList));
+                    } finally {
+                        b1.close();
+                    }
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                // String url_open ="C:/Users/killi/IdeaProjects/GoSecuri/FicheAgent.html";
-                BufferedWriter b1 = new BufferedWriter(f2);
-                try {
-                    b1.write(Generateur.genererAccueil(agentList));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                try {
-                    b1.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+
             }
         };
         threadAccueil.start();
+
        // java.awt.Desktop.getDesktop().browse(java.net.URI.create(url_open));
     }
         public static String genererHtml(Agent agent){
@@ -75,14 +76,15 @@ public class Generateur {
                                                      )
                                     )
                             )
-                    )
+                    )//test
             ).renderFormatted();
             return render;
+//tgttgtgggtgtg
     }
 
     public static String genererAccueil(ArrayList<Agent> agentList){
         String  render = html(
-                (DomContent) head(
+                 head(
                 title("Fiche Accueil"),
                 link().withRel("stylesheet").withHref("styles.css")
         ),
