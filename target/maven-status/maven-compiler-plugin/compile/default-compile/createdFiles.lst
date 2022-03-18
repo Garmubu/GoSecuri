@@ -1,3 +1,4 @@
-Agent.class
-Generateur.class
-Equipement.class
+fr/epsi/mspr/Agent.class
+fr/epsi/mspr/Generateur.class
+fr/epsi/mspr/Equipement.class
+fr/epsi/mspr/Generateur$1.class
