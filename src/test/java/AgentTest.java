@@ -1,5 +1,4 @@
 import fr.epsi.mspr.Agent;
-import fr.epsi.mspr.AgentDummy;
 import fr.epsi.mspr.Equipement;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -54,12 +53,6 @@ public class AgentTest {
         assertTrue(test);
     }
 
-    @Test
-    public void testDummy(){
-        var agent =new AgentDummy();
-
-
-    }
 
 
 }
