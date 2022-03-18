@@ -94,7 +94,7 @@ public class Generateur {
                         , div(attrs(".ListeAgent"),
                                 each(agentList, agent ->
                                         div(attrs(".agent"),
-                                                a(String.valueOf(agent.getNom())).withHref("C:/Users/killi/IdeaProjects/GoSecuri/FicheAgent"
+                                                a(String.valueOf(agent.getNom())).withHref("./FicheAgent"
                                                         +agent.getNom()+".html"))
                                 )
                         )
